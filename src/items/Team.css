@@ -1,0 +1,21 @@
+div, span, p {
+  /* border: 1px solid red; */
+}
+
+p {
+  /* margin: 0 auto; */
+}
+
+.Team-container {
+  min-width: 600px;
+  max-width: 900px;
+}
+
+.Team-team {
+  /* display: flex; */
+  /* justify-content: center; */
+}
+
+.fontsize_1_3_rem {
+  font-size: 1.3rem;
+}

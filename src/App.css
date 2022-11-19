@@ -1,0 +1,38 @@
+.App {
+  text-align: center;
+}
+
+.App main {
+  /* margin: 4rem 0; */
+}
+
+.App-loading {
+  color: salmon;
+  text-align: center;
+  margin: 40vh 0;
+  font-size: 4rem;
+}
+
+/* body, html {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+}
+
+main {
+  flex: 1;
+} */
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.App {
+  flex: 1;
+}

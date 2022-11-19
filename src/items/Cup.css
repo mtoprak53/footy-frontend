@@ -1,0 +1,26 @@
+
+/** BORDER SCAFFOLDING FOR DEVELOPEMENT */
+div, span, p, th, td {
+  /* border: 1px solid red; */
+}
+
+.fontsize_1_3_rem {
+  font-size: 1.3rem;
+}
+
+.League-table-team-logo {
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+}
+
+
+.Cup-rounds {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.CupRound-score {
+  font-size: 1.2rem;
+}

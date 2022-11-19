@@ -1,0 +1,49 @@
+
+/** BORDER SCAFFOLDING FOR DEVELOPEMENT */
+div, span, p, th, td {
+  /* border: 1px solid red; */
+}
+
+.League-container {
+  /* min-width: 600px;
+  max-width: 900px; */
+}
+
+.League, .League-container {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.League-league {
+  /* display: flex; */
+  /* justify-content: center; */
+}
+
+.fontsize_1_3_rem {
+  font-size: 1.3rem;
+}
+
+/* .image-header {
+  width: 65px;
+  height: 65px;
+  display: inline-block;
+} */
+
+.League-table-team-logo {
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+}
+
+.image-table {
+  /* width: 15px; */
+  /* height: 15px; */
+  /* display: inline-block; */
+}
+
+.hidden {
+  display: none;
+}
+

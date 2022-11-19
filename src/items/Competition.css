@@ -1,0 +1,127 @@
+
+/** BORDER SCAFFOLDING FOR DEVELOPEMENT */
+div, span, h1, h2, h3, h4, h5, h6, p {
+  /* border: 1px solid red; */
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+th {
+  font-size: 1.4rem;
+}
+
+ul {
+  list-style: none;
+}
+
+.Competition {
+  min-width: 800px;
+  max-width: 1200px;
+}
+
+.list {
+  padding: 0 0;
+}
+
+.table {
+  text-align: left;
+}
+
+.image-header {
+  width: 65px;
+  height: 65px;
+  display: inline-block;
+}
+
+.team-logo {
+  width: 25px;
+  height: 25px;
+  display: inline-block; 
+}
+
+.image-table {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  margin-right: 10px;;
+  margin-left: 0px;;
+}
+
+.header {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.season {
+  font-size: 2rem;
+}
+
+.team-name {
+  font-size: 1.2rem;
+  display: inline-block;
+}
+
+.game-container {
+  display: flex;
+}
+
+.game {
+  /* flex: 1 auto 1; */
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.game:first-child > span {
+  margin-left: auto;
+}
+
+.game:last-child > span {
+  margin-right: auto;
+}
+
+.home-team {
+  display: flex;
+  justify-content: flex-end;
+  /* justify-content: right; */
+  align-items: center;
+}
+
+.away-team {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.CupRound-country-cup {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.CupRound-season {
+  font-size: 2rem;
+}
+
+/* .container {
+  border: 2px solid yellow;  
+}
+
+.form-inline {
+  border: 2px solid blue;  
+}
+
+.form-row {
+  border: 2px solid green;  
+}
+
+.form-group {
+  border: 2px solid red;  
+} */
+
+.activeRound {
+  border: 5px solid #c4d6e5 !important;
+  background-color: #daeefe !important;
+}
