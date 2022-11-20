@@ -59,14 +59,6 @@ function App() {
           FootyApi.token = token;
           let currentUser = await FootyApi.getCurrentUser(username);
           let favs = await FootyApi.getFavorites(username);
-          console.log(`currentUser >> `);
-          console.log(currentUser);
-          console.log(`favoriteLeagues >> `);
-          console.log(favs[0]);
-          console.log(`favoriteCups >> `);
-          console.log(favs[1]);
-          console.log(`favoriteTeams >> `);
-          console.log(favs[2]);
           setCurrentUser(currentUser);
           setFavoriteLeagues(favs[0].favorites);
           setFavoriteCups(favs[1].favorites);
