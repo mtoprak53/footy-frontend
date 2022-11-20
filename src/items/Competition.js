@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
-import headers from "../_data/headers.json";
+// import headers from "../_data/headers.json";
 import LoadingSpinner from "../common/LoadingSpinner.js"
 import ErrorPage from "../common/ErrorPage";
 import CompetitionForm from "./CompetitionForm";
@@ -121,7 +121,10 @@ const Competition = ({ type }) => {
     
     const options = {
       method: "GET",
-      headers: headers,
+      headers: {
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
+        "X-RapidAPI-Host": process.env.REACT_APP_API_HOST
+      },
       url: BASE_URL + route 
     }
 
