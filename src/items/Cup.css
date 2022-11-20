@@ -1,9 +1,4 @@
 
-/** BORDER SCAFFOLDING FOR DEVELOPEMENT */
-div, span, p, th, td {
-  /* border: 1px solid red; */
-}
-
 .fontsize_1_3_rem {
   font-size: 1.3rem;
 }

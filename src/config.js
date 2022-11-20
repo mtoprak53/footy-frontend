@@ -1,7 +1,3 @@
-const headers = {
-  "X-RapidAPI-Key": "9aaa87feb1msh1f7452fb0989f38p1d2a37jsnd6476f2b7d4d",
-  "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com"
-};
 
 const BASE_URL = "https://api-football-v1.p.rapidapi.com/v3/";
 
@@ -43,7 +39,6 @@ const oneYearInMs = 86400000*365;
 
 
 export {
-  headers, 
   BASE_URL,
   mainNations, 
   mainNationsTeams, 

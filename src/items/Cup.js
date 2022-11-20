@@ -2,43 +2,24 @@ import React, { useState, useEffect, useContext } from "react";
 import UserContext from "../auth/userContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
-// import headers from "../_data/headers.json";
 import FavoriteHandler from "./FavoriteHandler";
 import LoadingSpinner from "../common/LoadingSpinner.js"
 import ErrorPage from "../common/ErrorPage";
 import ls from "localstorage-ttl";
 import Heading from "./Heading";
 import "./Cup.css";
-// import CupRound from "./maybe/CupRound";
 import { months } from "../config";
 
 const Cup = (props) => {
-  console.log("props");
-  console.log(props);
-
-  // const id = props.id
-
   const { favoriteCups } = useContext(UserContext);
-
-  // TODO: Make the screen show new info when changed from one cup to another cup in Form
-
-  // TODO: Check the possibility of no rounds
   const rounds = props.data.cupData.rounds;
-  // const compData = JSON.parse(props.compData);
-  
-  console.log("***  CUP  ***");
-  console.log(rounds);
-  // console.log(compData);
-
   const { timezone }= useContext(UserContext).currentUser;
-
   const BASE_URL = "https://api-football-v1.p.rapidapi.com/v3/";
 
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState("idle");
   const [round_, setRound_] = useState(rounds[rounds.length - 1]);
-
 
   const showRound = async (round, evt) => {
     console.log(`showRound >> ${evt}, ${round}`);
@@ -50,7 +31,6 @@ const Cup = (props) => {
 
     const options = {
       method: "GET",
-      // headers: headers,
       headers: {
         "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
         "X-RapidAPI-Host": process.env.REACT_APP_API_HOST
@@ -63,23 +43,16 @@ const Cup = (props) => {
       let res;
       try {
         if (ls.get(route)) {
-          console.log("CupRound >> NO API CALL >> IT IS ALREADY IN CACHE !!");
           res = ls.get(route);
         } else {
-          console.log("CupRound >> API CALL MADE. >> IT IS NOT IN CACHE !!");
           res = await axios.request(options);
-          console.log(`useAxios >> status code: ${res.status}`);
           const oneHour = 86400000;
           ls.set(route, res, oneHour);
         }
-        console.log("");
-        console.log("\n*******  CUP DATA 2  *******\n");
-        console.log(res.data.response);
         setData(res.data.response);
         setRound_(round);
         setStatus("fetched");
       } catch (err) {
-        console.error(err);
         setError(err);
       }      
     }
@@ -89,27 +62,19 @@ const Cup = (props) => {
 
 
   useEffect(() => {
-    console.log("Cup >> useEffect >> mount | round_ >> ");
-    console.log(round_);
     showRound(round_);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
-  useEffect(() => {
-    console.log("Cup >> useEffect >> round_");
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [round_]);
+  useEffect(() => {}, [round_]);
 
   if (!rounds.length) {
     return <ErrorPage message="There is no fixture for this season yet."/>;
   };  
 
   if (status !== "fetched") return <LoadingSpinner />;
-  // if (status !== "fetched") return <div>Loading....</div>
-  // if (error) return <div>Sorry, something went wrong :(</div>
   if (error) {
     return <ErrorPage message="Sorry, something went wrong :("/>;
   }
@@ -138,7 +103,6 @@ const Cup = (props) => {
               <button href="#"
                   id={round} 
                   type="button" 
-                  //  className="btn btn-outline-dark"
                   className={
                     `btn btn-outline-dark m-1` 
                     + (round === round_ ? " activeRound" : "")

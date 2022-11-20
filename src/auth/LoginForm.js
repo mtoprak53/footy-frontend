@@ -7,7 +7,7 @@ import Alert from "../common/Alert";
  * Shows form and manages update to state on changes. 
  * On submission:
  * - calls login function prop
- * - redirects to /X route
+ * - redirects to / route
  * 
  * Routes -> LofginForm -> Alert
  * Routed as /login

@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
-// import { Link } from "react-router-dom";
 import Favorites from "./Favorites";
 import "./HomeLoggedIn.css";
 import UserContext from "../auth/userContext";
 
 /** Homepage of site. 
  * 
- * Shows welcome message or login/register buttons. 
+ * Shows welcome message and favorite stuff. 
  * 
  * Routed at / 
  * 
@@ -15,10 +14,7 @@ import UserContext from "../auth/userContext";
 
 function HomeLoggedIn({ user }) {
   const { favoriteLeagues, favoriteCups, favoriteTeams } = useContext(UserContext);
-  // console.debug("Homepage", "currentUser=", currentUser);
 
-  // console.debug(favoriteLeagues);
-  
   return (
       <div className="HomeLoggedIn">
         <h2>Welcome {user.username}</h2>

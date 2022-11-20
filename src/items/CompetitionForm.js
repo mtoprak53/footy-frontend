@@ -2,13 +2,11 @@ import React from "react";
 import { mainNations } from "../config";
 
 const CompetitionForm = ({ 
-  countries, 
-  country, 
+  countries,
   leagues, 
   cups, 
   seasons, 
   handleChange, 
-  // handleSubmit, 
   countryValue, 
   leagueValue, 
   cupValue, 
@@ -19,15 +17,13 @@ const CompetitionForm = ({
   return (
     <div className="CompetitionForm container">
       <form className="form-inline justify-content-around" 
-            // onSubmit={handleSubmit}
       >
 
         <div className="form-group col-4">
           <select
             value={countryValue}
             name="country"
-            className="form-control w-100" 
-            // defaultValue={country}
+            className="form-control w-100"
             onChange={handleChange}
           >
             <option value="" key="heading"
@@ -100,7 +96,6 @@ const CompetitionForm = ({
 
         </div>
         </div>
-        {/* <div className="row"></div> */}
         
         <div className="form-group col-3">
           <select
@@ -108,7 +103,6 @@ const CompetitionForm = ({
             id="season"
             name="season"
             className="form-control w-100" 
-            // defaultValue="2022"
             onChange={handleChange}
           >
             <option value="" key="heading"
@@ -124,12 +118,6 @@ const CompetitionForm = ({
           </select>
         </div>
         
-        {/* <button
-            type="submit"
-            className="btn btn-primary col"
-        >
-          Submit
-        </button> */}
       </form>
     </div>
   )

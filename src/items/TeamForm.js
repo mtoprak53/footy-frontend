@@ -18,16 +18,13 @@ const TeamForm = ({
 
   return (
     <div className="TeamForm container">
-      <form className="form-inline justify-content-around"
-            // onSubmit={handleSubmit}
-      >
+      <form className="form-inline justify-content-around">
 
         <div className="form-group col-4">
           <select
             value={countryValue}
             name="country"
-            className="form-control w-100" 
-            // defaultValue={country}
+            className="form-control w-100"
             onChange={handleChange}
           >
             <option value="" key="heading"
@@ -66,11 +63,6 @@ const TeamForm = ({
               -- LEAGUES --
             </option>
 
-            {/* <option value="national" key="national"
-                    className="font-weight-bold">
-              National
-            </option> */}
-
             {leagues.map(league => 
               <option value={league.id || league.country} 
                       key={league.id}>
@@ -93,7 +85,6 @@ const TeamForm = ({
               -- TEAMS --
             </option>
             {teams.map(team => 
-              // <option value={team.team.name} 
               <option value={team.team.id} 
                       key={team.team.id}>
                 {team.team.name.replace("Turkey", "Türkiye")}

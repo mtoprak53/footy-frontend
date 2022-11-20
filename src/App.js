@@ -7,12 +7,9 @@ import LoadingSpinner from "./common/LoadingSpinner";
 import FootyApi from "./api/api";
 import UserContext from "./auth/userContext";
 import jwt from "jsonwebtoken";
-// import { set } from "localstorage-ttl";
-// import { NavigationContainer } from '@react-navigation/native';
 
 // Key name for storing token in localStorage for "remember me" re-login
 export const TOKEN_STORAGE_ID = "footy-token";
-
 
 function App() {
   const [infoLoaded, setInfoLoaded] = useState(false);
@@ -23,7 +20,6 @@ function App() {
   const [favoriteLeagues, setFavoriteLeagues] = useState([]);
   const [favoriteCups, setFavoriteCups] = useState([]);
   const [favoriteTeams, setFavoriteTeams] = useState([]);
-  // const [error, setError] = useState(null);
 
   console.debug(
       "App",
@@ -41,7 +37,6 @@ function App() {
         return res;
       } catch (err) {
         console.error(err);
-        // setError(err);
       }
     };
 
@@ -95,26 +90,13 @@ function App() {
   async function getFavorites() {
     if (token) {
       try {
-        // let { username } = jwt.decode(token);
         // put the token on the Api class so it can use it to call the API.
-        // FootyApi.token = token;
-        // let currentUser = await FootyApi.getCurrentUser(username);
         let favs = await FootyApi.getFavorites(currentUser.username);
-        // console.log(`currentUser >> `);
-        // console.log(currentUser);
-        console.log(`favoriteLeagues >> `);
-        console.log(favs[0]);
-        console.log(`favoriteCups >> `);
-        console.log(favs[1]);
-        console.log(`favoriteTeams >> `);
-        console.log(favs[2]);
-        // setCurrentUser(currentUser);
         setFavoriteLeagues(favs[0].favorites);
         setFavoriteCups(favs[1].favorites);
         setFavoriteTeams(favs[2].favorites);
       } catch (err) {
         console.error("App loadUserInfo: problem loading", err);
-        // setCurrentUser(null);
       }
     }
     setInfoLoaded(true);
@@ -129,15 +111,8 @@ function App() {
   async function favorite(type, id) {
     try {
       await FootyApi.addFavorite(currentUser.username, type, id);
-      // if (type="league") {
-      //   setFavoriteLeagues(favoriteLeagues.filter(l => l.id !== id));
-      // } else {
-      //   setFavoriteTeams(favoriteTeams.filter(t => t.id !== id));
-      // }
-
       setInfoLoaded(false);
       getFavorites();
-
       return { success: true };
     } catch (errors) {
       console.error("favorite addition failed", errors);
@@ -150,15 +125,8 @@ function App() {
   async function unfavorite(type, id) {
     try {
       await FootyApi.deleteFavorite(currentUser.username, type, id);
-      // if (type="league") {
-      //   setFavoriteLeagues(favoriteLeagues.filter(l => l.id !== id));
-      // } else {
-      //   setFavoriteTeams(favoriteTeams.filter(t => t.id !== id));
-      // }
-
       setInfoLoaded(false);
       getFavorites();
-
       return { success: true };
     } catch (errors) {
       console.error("favorite deletion failed", errors);
@@ -208,13 +176,6 @@ function App() {
   if (!infoLoaded) return <LoadingSpinner />;
   
   return (
-    // <NavigationContainer
-    //   documentTitle={{
-    //     formatter: (options, route) =>
-    //       `${options?.title ?? route?.name} - My Cool App`,
-    //   }}
-    // >
-
       <BrowserRouter>
         <UserContext.Provider
             value={{ 
@@ -235,9 +196,7 @@ function App() {
             />
           </div>
         </UserContext.Provider>
-      </BrowserRouter>
-
-    // </NavigationContainer>    
+      </BrowserRouter> 
   );
 }
 

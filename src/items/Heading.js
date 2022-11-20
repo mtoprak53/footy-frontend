@@ -18,14 +18,12 @@ const Heading = ({ header, logo, name, country, flag }) => {
             <div className="Heading-component col row d-flex align-items-center">
               <div className="col-4"><img src={logo} alt="" /></div>
               <div className="image-header d-flex align-items-center col">
-                {/* <h2>{name}</h2> */}
                 <h2>{newName}</h2>
               </div>
             </div>
 
             <div className="Heading-country col row d-flex align-items-center">
               <div className="image-header d-flex align-items-center justify-content-end col">
-                {/* <h2 className="">{country}</h2> */}
                 <h2 className="">{newCountry}</h2>
               </div>
               <div className="col-4">

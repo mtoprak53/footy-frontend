@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-// import React, { useState, useEffect } from "react";
 import UserContext from "../auth/userContext";
 import FavoriteHandler from "./FavoriteHandler";
 import Heading from "./Heading";
@@ -17,9 +16,6 @@ const Team = ({
   capacity, 
   image
 }) => {
-  console.log("Team  >>  props");
-  console.log(id);
-
   const { favoriteTeams } = useContext(UserContext);
 
   return (

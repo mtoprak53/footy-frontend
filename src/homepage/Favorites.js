@@ -4,14 +4,7 @@ import "./HomeLoggedIn.css";
 import UserContext from "../auth/userContext";
 import { defaultSeason } from "../config";
 
-/** Homepage of site. 
- * 
- * Shows welcome message or login/register buttons. 
- * 
- * Routed at / 
- * 
- * Routes -> Homepage
- */
+/** General Favorites Component */
 
 function Favorites({ favoriteArr, type }) {
   const { unfavorite } = useContext(UserContext);

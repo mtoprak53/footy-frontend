@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
-// import headers from "../_data/headers.json";
 import LoadingSpinner from "../common/LoadingSpinner.js"
 import ErrorPage from "../common/ErrorPage";
 import CompetitionForm from "./CompetitionForm";
@@ -14,8 +13,6 @@ import "./Competition.css";
 import { 
   BASE_URL, 
   defaultCountry, 
-  // defaultLeagueId, 
-  // defaultCupId, 
   defaultSeason, 
   oneDayInMs, 
   oneWeekInMs 
@@ -23,27 +20,14 @@ import {
 
 const Competition = ({ type }) => {
   const { countries } = useContext(UserContext);
-  
-  // let { id, season, type } = useParams();
   let { id, season } = useParams();
-
-  // id = id || 
-  //     (type === "league" && defaultLeagueId) || 
-  //     (type === "cup" && defaultCupId);
-  // season = season || defaultSeason;
-
   const history = useHistory();
-
   const location = useLocation();
-  console.log(location);
 
   // Async Handlers
-  // const [formLoaded, setFormLoaded] = useState(false);
   const [dataLoaded, setDataLoaded] = useState(false);
 
   // CompetitionForm
-  // /** [{ name, flag }, ... ] */
-  // const [countries, setCountries] = useState([]);
   const [leagues, setLeagues] = useState([]);
   const [cups, setCups] = useState([]);
   const [seasons, setSeasons] = useState([]);
@@ -65,12 +49,6 @@ const Competition = ({ type }) => {
     country: id ? null : defaultCountry, 
   });
 
-  console.log("Competition");
-  console.log(leagueInfo);
-  console.log( id, season, type );
-  console.log(location.pathname);
-  // console.log("leagues.length, cups.length");
-  // console.log(leagues.length, cups.length);
 
   async function getCupCountry(id) {
     try {
@@ -92,25 +70,8 @@ const Competition = ({ type }) => {
       console.error("getCountriesLeagues failed", errors);
       return { success: false, errors };
     }
-    // setFormLoaded(true);
   };
-
-  // async function getSeasons(leagueId) {
-  //   try {
-  //     // const res = await FootyApi.getCountrysLeagues(country);
-  //     // setLeagues(leagues => res.filter(r => r.type === "League"));
-  //     // setCups(cups => res.filter(r => r.type === "Cup"));
-  //     // // console.log(`getLeagues >> res=`);
-  //     // // console.log(res);
-  //     return;
-  //   } catch (errors) {
-  //     console.error("getCountriesLeagues failed", errors);
-  //     return { success: false, errors };
-  //   }
-  //   // setFormLoaded(true);
-  // }
-  
-
+ 
   /**   USE EFFECT - INITIAL */
   /**   **************************   */  
 
@@ -121,7 +82,6 @@ const Competition = ({ type }) => {
     
     const options = {
       method: "GET",
-      // headers: headers,
       headers: {
         "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
         "X-RapidAPI-Host": process.env.REACT_APP_API_HOST
@@ -164,8 +124,7 @@ const Competition = ({ type }) => {
   }, []);
 
 
-  /**   USE EFFECT - SUBMIT TOGGLE */
-  /**   **************************   */
+  /**   USE EFFECT */
 
   useEffect(() => {
     console.log("useEffect >> submitToggle");
@@ -179,7 +138,6 @@ const Competition = ({ type }) => {
     
     const options = {
       method: "GET",
-      // headers: headers,
       headers: {
         "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
         "X-RapidAPI-Host": process.env.REACT_APP_API_HOST
@@ -200,51 +158,35 @@ const Competition = ({ type }) => {
           res = await axios.request(options);
           console.log(`useAxios >> status code: ${res.status}`);
           ls.set(route, res, oneDayInMs);
-          // ls.set(leagueInfo.id, leagueInfo.type, oneDay*7);
         }
 
         let country_;
-        // if (leagueInfo.type === "league") {
-        
-        // // FOR CUPS IN FAVORITE LEAGUES
-        // if (!res.data.response[0].league) type = "cup";
 
         if (type === "league") {
           console.log(res.data.response);
           if (res.data.response && res.data.response.length) {
             setLeagueData(res.data.response[0].league);
-            console.log("*******  LEAGUE DATA  *******");
-            console.log(res.data.response[0].league);
             country_= res.data.response[0].league.country;
           } else {
             setLeagueData(["empty"]);
             setLeagues(["empty"]);
             setCups(["empty"]);
             setError("No such a league ID or season!");
-            // setStatus("fetched");
-            // return <ErrorPage message="Not a legit league ID"/>;
-          }
-          
+          }          
         }      
 
-        // if (leagueInfo.type === "cup") {
         if (type === "cup") {
-          console.log(res.data.response);
           if (res.data.response && res.data.response.length) {
             setCupData({
               ...cupData, 
               rounds: res.data.response
             });
-            console.log("\n*******  CUP DATA  *******\n");
-            console.log(res.data.response);
             country_ = await getCupCountry(id);
           } else {
             setCupData(["empty"]);
             setLeagues(["empty"]);
             setCups(["empty"]);
             setError("No such a cup ID or season!");
-            // setStatus("fetched");
-            // return <ErrorPage message="Not a legit league ID"/>;
           }
         }
 
@@ -253,16 +195,13 @@ const Competition = ({ type }) => {
           id: id, 
           type: type,
           season: season, 
-          // country: res.data.response[0].country.name
           country: country_
         });
 
-        console.log(country_);
         getLeagues(country_);
         setStatus("fetched");
       } 
       catch (err) {
-        console.error(err);
         setError(err);
       }
       setDataLoaded(true);
@@ -275,25 +214,15 @@ const Competition = ({ type }) => {
   }, [ location.pathname ]);
 
   
-  // /** GO TO ERROR PAGE IF 'TYPE' IS NOT EITHER "LEAGUE" OR "CUP" */
-  // if (type !== "league" && type !== "cup") {
-  //   return <ErrorPage message="Type has to be either 'cup' or 'league'!!"/>;
-  // };
-
-
   /**   HANDLE CHANGE   */
   /**   *************   */
 
   /** Update form data field */
   async function handleChange(evt) {
     const { name, value } = evt.target;
-    // console.log("handleChange >> ");
-    // console.log({ name, value });
-
     let newId, newSeason, newType;
 
     if (name === "country") {
-      console.log("handleChange >> country change");
       document.getElementById("season").value="";
       getLeagues(value);
       setLeagueInfo(leagueInfo => ({
@@ -305,7 +234,6 @@ const Competition = ({ type }) => {
     }
 
     if (name === "league" && value) {
-      console.log("handleChange >> league change");
       document.getElementById("cup").value="";
       document.getElementById("season").value="";
       newId = +document.getElementById("league").value;
@@ -318,7 +246,6 @@ const Competition = ({ type }) => {
     }
 
     if (name === "cup" && value) {
-      console.log("handleChange >> cup change");
       document.getElementById("league").value="";
       document.getElementById("season").value="";
       newId = +document.getElementById("cup").value;
@@ -331,9 +258,6 @@ const Competition = ({ type }) => {
     }
 
     if (name === "season") {
-      console.log("handleChange >> season change");
-      console.log("id");
-      console.log(id);
       newSeason = +document.getElementById("season").value;
       setLeagueInfo(leagueInfo => ({
         ...leagueInfo,
@@ -347,75 +271,25 @@ const Competition = ({ type }) => {
       name === "season" ? newType = type : newType = name  
       history.push(`/${newType}/${newId}/${newSeason}`);
     }
-
-    console.log({ name, value });
   }
 
-
-  // let compComponent;
-
-  // if (type && 
-  //     leagueData && 
-  //     type.toLowerCase() === "league") {
-  //   compComponent = <League data={JSON.stringify(leagueData)} />
-  // }
-
-  // if (type && 
-  //     cupData && 
-  //     type.toLowerCase() === "cup") {
-  //   compComponent = <Cup data={{cupData}} 
-  //                        id={id} 
-  //                        season={season} 
-  //                       //  compData={JSON.stringify(leagueInfo)} />
-  //                        compData={JSON.stringify(leagueData)} />
-  // }
-
-  console.log("Spinner Stuff");
-  console.log("status");
-  console.log(status);
-  console.log("type");
-  console.log(type);
-  console.log("leagueData");
-  console.log(leagueData);
-  console.log("leagueInfo");
-  console.log(leagueInfo);
-  console.log("cupData");
-  console.log(cupData);
-  console.log("leagues");
-  console.log(leagues);
-  console.log("cups");
-  console.log(cups);
-  // console.log(type, leagueData, leagueInfo, cupData, leagues, cups);
 
   if (
     status !== "fetched" 
     || type !== leagueInfo.type 
-    // || (!leagueInfo.isCup && !leagueData) 
 
     /** WAIT FOR TYPE CHANGE - 1 */
     || (type === "league" && !leagueData) 
-    // || (leagueInfo.isCup && !cupData)
 
     /** WAIT FOR TYPE CHANGE - 2 */
     || (type === "cup" && !cupData)
 
-    // || (!leagues.length || !cups.length)
   ) return <LoadingSpinner />;
 
   if (error) {
     console.log("ERROR-1");
     return <ErrorPage message={error} />;
   }
-
-  // if (leagueData[0] === "empty" || cupData[0] === "empty") {
-  //   console.log("ERROR-2");
-  //   return <ErrorPage message="Sorry, this season does not have any schedule yet! :("/>
-  // }
-
-  // function errorFunc() {
-  //   return <ErrorPage message="Sorry, something went wrong :("/>;
-  // }
-
 
   return (
       <div className="Competition">
@@ -429,26 +303,19 @@ const Competition = ({ type }) => {
           seasons={seasons} 
           handleChange={handleChange} 
           countryValue={leagueInfo.country || defaultCountry}
-          // leagueValue={leagueInfo.id || (!leagueInfo.isCup && defaultLeagueId)}
           leagueValue={leagueInfo.id}
-          // cupValue={leagueInfo.id || (leagueInfo.isCup && defaultCupId)}
           cupValue={leagueInfo.id}
           seasonValue={leagueInfo.season || ""}
         />
 
         {/* SHOW LEAGUE OR CUP */}
-        {/* {compComponent} */}
-
         {type === "league"
         ? <League data={JSON.stringify(leagueData)} />
-        // ? <League data={JSON.stringify(leagueInfo)} />
         : <Cup data={{cupData}} 
               id={id} 
               season={season} 
-                // compData={JSON.stringify(leagueInfo)} />}
               compData={JSON.stringify(leagueData)} />}
-      </div>
-    
+      </div>    
   )
 }
 

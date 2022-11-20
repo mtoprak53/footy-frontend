@@ -80,11 +80,6 @@ class FootyApi {
     return res;
   }
 
-  // static async getCountrysCups(country) {
-  //   let res = await this.request(`locals/cups/${country}`);
-  //   return res;
-  // }
-
   static async getCupById(id) {
     let res = await this.request(`locals/cups/${id}`);
     return res;

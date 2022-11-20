@@ -5,25 +5,12 @@ import Heading from "./Heading";
 import "./League.css";
 
 const League = (props) => {
-  console.log("League  >>  props");
-  console.log(props);
-
-  // if (props.data)
-
   const { favoriteLeagues, favorite, unfavorite } = useContext(UserContext);
-
   const data = JSON.parse(props.data);
-  console.log("League");
-  // const { season, country, flag, logo, name, standings } = data;
   const { id, country, flag, logo, name, standings } = data;
-
-  console.log("favoriteLeagues >>> ");
-  console.log(favoriteLeagues);
 
   return (
     <div key={props.data} className="League d-flex justify-content-center">
-    {/* <div key={props.data} className="League justify-content-center"> */}
-    {/* <div key={props.data} className="League m-auto"> */}
       <div className="League-container mt-5">
 
         <div className="League-Favorite-Button">

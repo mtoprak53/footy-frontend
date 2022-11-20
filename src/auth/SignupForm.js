@@ -8,7 +8,7 @@ import FootyApi from "../api/api";
  * Shows form and manages update to state on changes.
  * On submission:
  * - calls signup function prop
- * - redirects to /X route
+ * - redirects to / route
  *
  * Routes -> SignupForm -> Alert
  * Routed as /signup
@@ -57,11 +57,9 @@ function SignupForm({ signup }) {
       if (value !== "") {
         const citiesRes = await FootyApi.getCities(value);
         const citiesArr = citiesRes.map(city => city.city);
-        // setFormData(data => ({ ...data, cities: citiesArr }));
         setCities(cities => citiesArr);
         console.log("cities", citiesArr);
       } else {
-        // setFormData(data => ({ ...data, cities: [] }));
         setCities(cities => []);
         console.log("cities", []);
       }
