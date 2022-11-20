@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import UserContext from "../auth/userContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import headers from "../_data/headers.json";
+// import headers from "../_data/headers.json";
 import FavoriteHandler from "./FavoriteHandler";
 import LoadingSpinner from "../common/LoadingSpinner.js"
 import ErrorPage from "../common/ErrorPage";
@@ -50,7 +50,11 @@ const Cup = (props) => {
 
     const options = {
       method: "GET",
-      headers: headers,
+      // headers: headers,
+      headers: {
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
+        "X-RapidAPI-Host": process.env.REACT_APP_API_HOST
+      },
       url: BASE_URL + route
     }
 

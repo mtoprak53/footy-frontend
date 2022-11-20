@@ -16,7 +16,7 @@ import {
   defaultSeason, 
   oneMonthInMs 
 } from "../config";
-import headers from "../_data/headers.json";
+// import headers from "../_data/headers.json";
 import UserContext from "../auth/userContext"
 import ls from "localstorage-ttl";
 import "./Teams.css";
@@ -75,7 +75,11 @@ const Teams = () => {
     const route = `teams?league=${leagueId}&season=${defaultSeason}`;
     const options = {
       method: "GET",
-      headers: headers,
+      // headers: headers,
+      headers: {
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
+        "X-RapidAPI-Host": process.env.REACT_APP_API_HOST
+      },
       url: BASE_URL + route
     };
 
@@ -112,7 +116,11 @@ const Teams = () => {
     const route = `teams?country=${countryName}`;
     const options = {
       method: "GET",
-      headers: headers,
+      // headers: headers,
+      headers: {
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
+        "X-RapidAPI-Host": process.env.REACT_APP_API_HOST
+      },
       url: BASE_URL + route
     };
 
@@ -153,7 +161,11 @@ const Teams = () => {
     const route = `teams?id=${teamId}`;
     const options = {
       method: "GET",
-      headers: headers,
+      // headers: headers,
+      headers: {
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
+        "X-RapidAPI-Host": process.env.REACT_APP_API_HOST
+      },
       url: BASE_URL + route
     }
 
