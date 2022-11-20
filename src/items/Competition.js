@@ -121,6 +121,7 @@ const Competition = ({ type }) => {
     
     const options = {
       method: "GET",
+      // headers: headers,
       headers: {
         "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
         "X-RapidAPI-Host": process.env.REACT_APP_API_HOST
@@ -178,7 +179,11 @@ const Competition = ({ type }) => {
     
     const options = {
       method: "GET",
-      headers: headers,
+      // headers: headers,
+      headers: {
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
+        "X-RapidAPI-Host": process.env.REACT_APP_API_HOST
+      },
       url: BASE_URL + route 
     }
 
